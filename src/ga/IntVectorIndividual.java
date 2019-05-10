@@ -9,10 +9,22 @@ public abstract class IntVectorIndividual<P extends Problem, I extends IntVector
 
     public IntVectorIndividual(P problem, int size) {
         super(problem);
-        genome = new int[size];
+        int[] temp = new int[size];
+        int i, j, g, v;
 
-        //TODO
-        throw new UnsupportedOperationException("Not Implemented Yet");
+        for (i=1; i<=size; i++) {
+            temp[i-1] = i;
+        }
+
+        for (i=0; i<size; i++) {
+            j = GeneticAlgorithm.random.nextInt(size);
+            g = GeneticAlgorithm.random.nextInt(size);
+            v = temp[j];
+            temp[j] = temp[g];
+            temp[j] = v;
+        }
+
+        genome = temp;
       }
 
     public IntVectorIndividual(IntVectorIndividual<P, I> original) {
