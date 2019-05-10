@@ -21,7 +21,7 @@ public abstract class IntVectorIndividual<P extends Problem, I extends IntVector
             g = GeneticAlgorithm.random.nextInt(size);
             v = temp[j];
             temp[j] = temp[g];
-            temp[j] = v;
+            temp[g] = v;
         }
 
         genome = temp;

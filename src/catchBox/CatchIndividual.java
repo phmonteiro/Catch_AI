@@ -22,44 +22,50 @@ public class CatchIndividual extends IntVectorIndividual<CatchProblemForGA, Catc
         LinkedList<Cell> cellsBoxes = problem.getCellsBoxes();
         LinkedList<Pair> pairs = problem.getPairs();
         int pairsLength = pairs.size();
-        Pair currentPair;
 
-        Cell catchCurrent = problem.getCellCatch();
-        Cell door = problem.getDoor();
-        fitness=0;
+        Cell currentPosition = problem.getCellCatch();
+        Cell nextPosition;
+        Cell firstCell, secondCell;
         int i,j;
 
-        // calcular da primeira posição até à primeira posição do genoma
-        for (i=0; i<pairsLength; i++) {
-            currentPair = pairs.get(i);
-            if ((catchCurrent == currentPair.getCell1() && cellsBoxes.get(genome[0]) == currentPair.getCell2())
-                || (catchCurrent == currentPair.getCell2() && cellsBoxes.get(genome[0]) == currentPair.getCell1())) {
+        fitness=0;
 
-                fitness += currentPair.getValue();
+        // calcular da primeira posição do agente até à primeira caixa
+        for (i=0; i<pairsLength; i++) {
+            firstCell = pairs.get(i).getCell1();
+            secondCell = pairs.get(i).getCell2();
+
+            if ((currentPosition == firstCell && cellsBoxes.get(genome[0]-1) == secondCell) || (currentPosition == secondCell && cellsBoxes.get(genome[0]-1) == firstCell)) {
+                fitness += pairs.get(i).getValue();
             }
         }
 
-        // distancias entre as caixas
+        // distancias somente entre caixas
         for (i=0; i<genome.length-1; i++) {
-            for (j=0; j<pairsLength; i++) {
-                currentPair = pairs.get(j);
+            currentPosition = cellsBoxes.get(genome[i]-1);
+            nextPosition = cellsBoxes.get(genome[i+1]-1);
 
-                if ((cellsBoxes.get(genome[i]) == currentPair.getCell1() && cellsBoxes.get(genome[i+1]) == currentPair.getCell2())
-                   || (cellsBoxes.get(genome[i]) == currentPair.getCell2() && cellsBoxes.get(genome[i+1]) == currentPair.getCell1())) {
-                    fitness += currentPair.getValue();
+            for (j=0; j<pairsLength; j++) {
+                firstCell = pairs.get(j).getCell1();
+                secondCell = pairs.get(j).getCell2();
+
+                if ((currentPosition == firstCell && nextPosition == secondCell) || (currentPosition == secondCell && nextPosition == firstCell)) {
+                    fitness += pairs.get(j).getValue();
+                    break;
                 }
             }
         }
 
-        catchCurrent = cellsBoxes.get(genome.length);
-
         // distancia da última caixa à porta
-        for (i=0; i<pairsLength; i++) {
-            currentPair = pairs.get(i);
-            if ((catchCurrent == currentPair.getCell1() && door == currentPair.getCell2())
-                || (catchCurrent == currentPair.getCell2() && door == currentPair.getCell1())) {
+        currentPosition = cellsBoxes.get(genome[genome.length-1]-1);
+        nextPosition = problem.getDoor();
 
-                fitness += currentPair.getValue();
+        for (i=0; i<pairsLength; i++) {
+            firstCell = pairs.get(i).getCell1();
+            secondCell = pairs.get(i).getCell2();
+
+            if ((currentPosition == firstCell && nextPosition == secondCell) || (currentPosition == secondCell && nextPosition == firstCell)) {
+                fitness += pairs.get(i).getValue();
             }
         }
 

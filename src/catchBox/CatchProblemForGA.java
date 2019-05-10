@@ -1,8 +1,6 @@
 package catchBox;
 
 import ga.Problem;
-
-
 import java.util.LinkedList;
 
 public class CatchProblemForGA implements Problem<CatchIndividual> {
@@ -48,6 +46,14 @@ public class CatchProblemForGA implements Problem<CatchIndividual> {
     @Override
     public String toString() {
         //TODO
-        throw new UnsupportedOperationException("Not Implemented Yet");
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("# of boxes");
+        sb.append(cellsBoxes.size());
+        sb.append("\nPairs:");
+        sb.append(pairs.toString());
+        sb.append("\n");
+
+        return sb.toString();
     }
 }
