@@ -31,12 +31,13 @@ public class CatchIndividual extends IntVectorIndividual<CatchProblemForGA, Catc
         fitness=0;
 
         // calcular da primeira posição do agente até à primeira caixa
-        for (i=0; i<pairsLength; i++) {
-            firstCell = pairs.get(i).getCell1();
-            secondCell = pairs.get(i).getCell2();
+        for (Pair pair : pairs) {
+            firstCell = pair.getCell1();
+            secondCell = pair.getCell2();
 
             if ((currentPosition == firstCell && cellsBoxes.get(genome[0]-1) == secondCell) || (currentPosition == secondCell && cellsBoxes.get(genome[0]-1) == firstCell)) {
-                fitness += pairs.get(i).getValue();
+                fitness += pair.getValue();
+                break;
             }
         }
 
@@ -45,12 +46,12 @@ public class CatchIndividual extends IntVectorIndividual<CatchProblemForGA, Catc
             currentPosition = cellsBoxes.get(genome[i]-1);
             nextPosition = cellsBoxes.get(genome[i+1]-1);
 
-            for (j=0; j<pairsLength; j++) {
-                firstCell = pairs.get(j).getCell1();
-                secondCell = pairs.get(j).getCell2();
+            for (Pair pair : pairs) {
+                firstCell = pair.getCell1();
+                secondCell = pair.getCell2();
 
                 if ((currentPosition == firstCell && nextPosition == secondCell) || (currentPosition == secondCell && nextPosition == firstCell)) {
-                    fitness += pairs.get(j).getValue();
+                    fitness += pair.getValue();
                     break;
                 }
             }
@@ -60,12 +61,13 @@ public class CatchIndividual extends IntVectorIndividual<CatchProblemForGA, Catc
         currentPosition = cellsBoxes.get(genome[genome.length-1]-1);
         nextPosition = problem.getDoor();
 
-        for (i=0; i<pairsLength; i++) {
-            firstCell = pairs.get(i).getCell1();
-            secondCell = pairs.get(i).getCell2();
+        for (Pair pair : pairs) {
+            firstCell = pair.getCell1();
+            secondCell = pair.getCell2();
 
             if ((currentPosition == firstCell && nextPosition == secondCell) || (currentPosition == secondCell && nextPosition == firstCell)) {
                 fitness += pairs.get(i).getValue();
+                break;
             }
         }
 
