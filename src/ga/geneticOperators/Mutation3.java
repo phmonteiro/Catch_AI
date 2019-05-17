@@ -1,5 +1,6 @@
 package ga.geneticOperators;
 
+import ga.GeneticAlgorithm;
 import ga.IntVectorIndividual;
 import ga.Problem;
 
@@ -12,11 +13,25 @@ public class Mutation3<I extends IntVectorIndividual, P extends Problem<I>> exte
 
     @Override
     public void mutate(I ind) {
-        //TODO
-  throw new UnsupportedOperationException("Not Implemented Yet");    }
+        int numGenes = ind.getNumGenes();
+        int primeiroAlelo = GeneticAlgorithm.random.nextInt(numGenes);
+        int segundoAlelo;
+
+        do {
+            if (primeiroAlelo == numGenes) {
+                segundoAlelo = GeneticAlgorithm.random.nextInt(numGenes-1);
+            } else {
+                segundoAlelo = GeneticAlgorithm.random.nextInt(numGenes);
+            }
+        } while (primeiroAlelo == segundoAlelo);
+
+        int auxGene = ind.getGene(segundoAlelo);
+        ind.setGene(segundoAlelo, ind.getGene(primeiroAlelo));
+        ind.setGene(primeiroAlelo, auxGene);
+    }
 
     @Override
     public String toString() {
-        //TODO
-  throw new UnsupportedOperationException("Not Implemented Yet");    }
+        return "Swap";
+    }
 }

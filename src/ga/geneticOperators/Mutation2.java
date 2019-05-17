@@ -1,5 +1,6 @@
 package ga.geneticOperators;
 
+import ga.GeneticAlgorithm;
 import ga.IntVectorIndividual;
 import ga.Problem;
 
@@ -16,33 +17,32 @@ public class Mutation2<I extends IntVectorIndividual, P extends Problem<I>> exte
 
     @Override
     public void mutate(I ind) {
-        int primeiroAlelo = random.nextInt(ind.getNumGenes());
-        int segundoAlelo = 0;
+        int numGenes = ind.getNumGenes();
+        int primeiroAlelo = GeneticAlgorithm.random.nextInt(numGenes);
+        int seguinteAoPrimeiro, segundoAlelo, auxTroca;
 
         do {
-
-            if (primeiroAlelo == ind.getNumGenes()){
-                segundoAlelo = random.nextInt(ind.getNumGenes()-1);
+            if (primeiroAlelo == numGenes) {
+                segundoAlelo = GeneticAlgorithm.random.nextInt(numGenes - 1);
             } else {
-                segundoAlelo = random.nextInt(ind.getNumGenes());
+                segundoAlelo = GeneticAlgorithm.random.nextInt(numGenes);
             }
 
             if (primeiroAlelo > segundoAlelo) {
-
-                int auxTrocaAlelos = primeiroAlelo;
+                auxTroca = primeiroAlelo;
                 primeiroAlelo = segundoAlelo;
-                segundoAlelo = auxTrocaAlelos;
+                segundoAlelo = auxTroca;
             }
-        } while (primeiroAlelo == segundoAlelo && primeiroAlelo+1 == segundoAlelo);
+        } while (primeiroAlelo == segundoAlelo && primeiroAlelo + 1 == segundoAlelo);
 
-        int seguinteAoPrimeiro = primeiroAlelo+1;
-        int auxSegundoAllello = segundoAlelo;
+        seguinteAoPrimeiro = primeiroAlelo + 1;
+        auxTroca = ind.getGene(segundoAlelo);
 
-        for (int i=segundoAlelo; i>primeiroAlelo+1; i--) {
-            ind.setGene(i, ind.getGene(i-1));
+        for (int i = segundoAlelo; i > seguinteAoPrimeiro; i--) {
+            ind.setGene(i, ind.getGene(i - 1));
         }
 
-        ind.setGene(seguinteAoPrimeiro, auxSegundoAllello);
+        ind.setGene(seguinteAoPrimeiro, auxTroca);
 
 //        int auxGeneSeguinteAoPrimeiroAlelo = ind.getGene(segundoAlelo);
 //        ind.setGene(seguinteAoPrimeiro, ind.getGene(segundoAlelo));
@@ -51,6 +51,6 @@ public class Mutation2<I extends IntVectorIndividual, P extends Problem<I>> exte
 
     @Override
     public String toString() {
-        //TODO
-      throw new UnsupportedOperationException("Not Implemented Yet");    }
+        return "Insert mutation.\n";
     }
+}
