@@ -16,10 +16,11 @@ public class CatchState extends State implements Cloneable {
     private int lineCatch;
     private int columnCatch;
     private int steps;
+    private int doorLine;
+    private int doorColumn;
 
     public CatchState(int[][] matrix) {
         //TODO
-
         this.matrix = new int[matrix.length][matrix.length];
 
         for (int i = 0; i < matrix.length; i++) {
@@ -28,6 +29,9 @@ public class CatchState extends State implements Cloneable {
                 if (this.matrix[i][j] == Properties.CATCH) {
                     lineCatch = i;
                     columnCatch = j;
+                } else if (this.matrix[i][j] == Properties.DOOR) {
+                    doorLine = i;
+                    doorColumn = j;
                 }
             }
         }
@@ -124,11 +128,12 @@ public class CatchState extends State implements Cloneable {
                 return Properties.COLORBOX;
             case Properties.CATCH:
                 return Properties.COLORCATCH;
-            case Properties.DOOR:
-                return Properties.COLORDOOR;
             case Properties.WALL:
                 return Properties.COLORWALL;
             default:
+                if (line == doorLine && column == doorColumn) {
+                    return Properties.COLORDOOR;
+                }
                 return Properties.COLOREMPTY;
         }
     }
