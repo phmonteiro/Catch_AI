@@ -53,70 +53,8 @@ public class Mutation3<I extends IntVectorIndividual, P extends Problem<I>> exte
 
     }
 
-
-
-/*        int[] availableGenes = new int[segundoAlelo-primeiroAlelo+1];*/
-
-       /* for (int i = 0; i < segundoAlelo ; i++) {
-            individualGenes[i] = ind.getGene(i);
-        }
-
-        int geneEscolhido;
-
-
-
-        for (int i = 0; i < individualGenes.length; i++) {
-
-            scrambledGenes[i] =  geneEscolhido;
-        }
-
-        for (int i = primeiroAlelo; i < segundoAlelo ; i++) {
-            ind.setGene(i, );
-        }*/
-
-    }
-
-
-/*    public int[] escolherGene(int[] individualGenes, int[] scrambledGenes){
-        int geneEscolhido = GeneticAlgorithm.random.nextInt(individualGenes.length-1);
-
-        for (int i = 0; i < individualGenes.length; i++) {
-            if (individualGenes[i] == geneEscolhido){
-                int[] newGenome = new int[individualGenes.length-1];
-
-                for (int j = 0; j < individualGenes.length - 1; j++) {
-                    if (individualGenes[j] != geneEscolhido){
-                        newGenome[i]
-                    }
-
-                }
-                scrambledGenes[i] = geneEscolhido;
-            }
-        }
-
-    }*/
-
-
-
-/*        int numGenes = ind.getNumGenes();
-        int primeiroAlelo = GeneticAlgorithm.random.nextInt(numGenes);
-        int segundoAlelo;
-
-        if (primeiroAlelo == numGenes) {
-            segundoAlelo = GeneticAlgorithm.random.nextInt(numGenes-1);
-        } else {
-            do {
-                segundoAlelo = GeneticAlgorithm.random.nextInt(numGenes);
-            } while (primeiroAlelo == segundoAlelo);
-        }
-
-        int auxGene = ind.getGene(segundoAlelo);
-        ind.setGene(segundoAlelo, ind.getGene(primeiroAlelo));
-        ind.setGene(primeiroAlelo, auxGene);
-    }
-
     @Override
     public String toString() {
-        return "Swap mutation.\n";
-    }*/
+        return "Scramble mutation.\n";
+    }
 }
