@@ -60,4 +60,12 @@ public abstract class IntVectorIndividual<P extends Problem, I extends IntVector
         genome[index] = other.genome[index];
         other.genome[index] = aux;
     }
+
+    public int[] getGenome() {
+        return genome;
+    }
+
+    public void setGenome(int[] genome) {
+        this.genome = genome;
+    }
 }
