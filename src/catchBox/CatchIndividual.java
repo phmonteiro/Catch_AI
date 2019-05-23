@@ -21,52 +21,42 @@ public class CatchIndividual extends IntVectorIndividual<CatchProblemForGA, Catc
         //TODO
         LinkedList<Cell> cellsBoxes = problem.getCellsBoxes();
         LinkedList<Pair> pairs = problem.getPairs();
-        int pairsLength = pairs.size();
 
+        fitness = 0;
+
+        // Fitness do catch até à primeira caixa
         Cell currentPosition = problem.getCellCatch();
-        Cell nextPosition;
-        Cell firstCell, secondCell;
-        int i,j;
+        Cell nextPosition = cellsBoxes.get(genome[0]-1);
+        fitness += fitnessBetweenTwoPositions(pairs, currentPosition, nextPosition);
 
-        fitness=0;
-
-        // calcular da primeira posição do agente até à primeira caixa
-        for (Pair pair : pairs) {
-            firstCell = pair.getCell1();
-            secondCell = pair.getCell2();
-
-            if ((currentPosition == firstCell && cellsBoxes.get(genome[0]-1) == secondCell) || (currentPosition == secondCell && cellsBoxes.get(genome[0]-1) == firstCell)) {
-                fitness += pair.getValue();
-                break;
-            }
-        }
-
-        // distancias somente entre caixas
-        for (i=0; i<genome.length-1; i++) {
+        // Fitness entre caixas
+        for (int i=0; i<genome.length-1; i++) {
             currentPosition = cellsBoxes.get(genome[i]-1);
             nextPosition = cellsBoxes.get(genome[i+1]-1);
 
-            for (Pair pair : pairs) {
-                firstCell = pair.getCell1();
-                secondCell = pair.getCell2();
-
-                if ((currentPosition == firstCell && nextPosition == secondCell) || (currentPosition == secondCell && nextPosition == firstCell)) {
-                    fitness += pair.getValue();
-                    break;
-                }
-            }
+            fitness += fitnessBetweenTwoPositions(pairs, currentPosition, nextPosition);
         }
 
-        // distancia da última caixa à porta
+        // Fitness da última caixa à porta
         currentPosition = cellsBoxes.get(genome[genome.length-1]-1);
         nextPosition = problem.getDoor();
 
-        for (Pair pair : pairs) {
-            firstCell = pair.getCell1();
-            secondCell = pair.getCell2();
+        fitness += fitnessBetweenTwoPositions(pairs, currentPosition, nextPosition);
 
-            if ((currentPosition == firstCell && nextPosition == secondCell) || (currentPosition == secondCell && nextPosition == firstCell)) {
-                fitness += pairs.get(i).getValue();
+        return fitness;
+    }
+
+    private double fitnessBetweenTwoPositions (LinkedList<Pair> pairs, Cell currentPosition, Cell nextPosition) {
+        Cell firstCell, secondCell;
+        double fitness = 0;
+
+        for (Pair p : pairs) {
+            firstCell = p.getCell1();
+            secondCell = p.getCell2();
+
+            if ((currentPosition.equals(firstCell) && nextPosition.equals(secondCell)) ||
+                    (currentPosition.equals(secondCell) && nextPosition.equals(firstCell))) {
+                fitness += p.getValue();
                 break;
             }
         }
