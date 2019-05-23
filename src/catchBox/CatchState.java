@@ -153,11 +153,7 @@ public class CatchState extends State implements Cloneable {
         }
 
         CatchState o = (CatchState) other;
-        if (matrix.length != o.matrix.length) {
-            return false;
-        }
-
-        return Arrays.deepEquals(matrix, o.matrix);
+        return matrix.length == o.matrix.length && Arrays.deepEquals(matrix, o.matrix);
     }
 
     @Override

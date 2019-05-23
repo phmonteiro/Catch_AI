@@ -17,13 +17,13 @@ public class Mutation3<I extends IntVectorIndividual, P extends Problem<I>> exte
         int primeiroAlelo = GeneticAlgorithm.random.nextInt(numGenes);
         int segundoAlelo;
 
-        do {
-            if (primeiroAlelo == numGenes) {
-                segundoAlelo = GeneticAlgorithm.random.nextInt(numGenes-1);
-            } else {
+        if (primeiroAlelo == numGenes) {
+            segundoAlelo = GeneticAlgorithm.random.nextInt(numGenes-1);
+        } else {
+            do {
                 segundoAlelo = GeneticAlgorithm.random.nextInt(numGenes);
-            }
-        } while (primeiroAlelo == segundoAlelo);
+            } while (primeiroAlelo == segundoAlelo);
+        }
 
         int auxGene = ind.getGene(segundoAlelo);
         ind.setGene(segundoAlelo, ind.getGene(primeiroAlelo));
@@ -32,6 +32,6 @@ public class Mutation3<I extends IntVectorIndividual, P extends Problem<I>> exte
 
     @Override
     public String toString() {
-        return "Swap";
+        return "Swap mutation.\n";
     }
 }

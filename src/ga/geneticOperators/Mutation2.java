@@ -18,39 +18,35 @@ public class Mutation2<I extends IntVectorIndividual, P extends Problem<I>> exte
     @Override
     public void mutate(I ind) {
         int numGenes = ind.getNumGenes();
-        int primeiroAlelo = GeneticAlgorithm.random.nextInt(numGenes);
-        int seguinteAoPrimeiro, segundoAlelo, auxTroca;
+        int primeiroAlello = GeneticAlgorithm.random.nextInt(numGenes);
+        int segundoAlello;
 
-        do {
-            if (primeiroAlelo == numGenes) {
-                segundoAlelo = GeneticAlgorithm.random.nextInt(numGenes - 1);
-            } else {
-                segundoAlelo = GeneticAlgorithm.random.nextInt(numGenes);
-            }
-
-            if (primeiroAlelo > segundoAlelo) {
-                auxTroca = primeiroAlelo;
-                primeiroAlelo = segundoAlelo;
-                segundoAlelo = auxTroca;
-            }
-        } while (primeiroAlelo == segundoAlelo && primeiroAlelo + 1 == segundoAlelo);
-
-        seguinteAoPrimeiro = primeiroAlelo + 1;
-        auxTroca = ind.getGene(segundoAlelo);
-
-        for (int i = segundoAlelo; i > seguinteAoPrimeiro; i--) {
-            ind.setGene(i, ind.getGene(i - 1));
+        if (primeiroAlello == numGenes) {
+            segundoAlello = GeneticAlgorithm.random.nextInt(numGenes - 1);
+        } else {
+            do {
+                segundoAlello = GeneticAlgorithm.random.nextInt(numGenes);
+            } while (primeiroAlello == segundoAlello);
         }
 
-        ind.setGene(seguinteAoPrimeiro, auxTroca);
+        if (primeiroAlello > segundoAlello) {
+            int aux = primeiroAlello;
+            primeiroAlello = segundoAlello;
+            segundoAlello = aux;
+        }
 
-//        int auxGeneSeguinteAoPrimeiroAlelo = ind.getGene(segundoAlelo);
-//        ind.setGene(seguinteAoPrimeiro, ind.getGene(segundoAlelo));
-//        ind.setGene(segundoAlelo, auxGeneSeguinteAoPrimeiroAlelo);
+        int j = segundoAlello - 1;
+        int auxGene;
+
+        for (int i = primeiroAlello + 1; i < j ; i++, j--) {
+            auxGene = ind.getGene(i);
+            ind.setGene(i, ind.getGene(j));
+            ind.setGene(j, auxGene);
+        }
     }
 
     @Override
     public String toString() {
-        return "Insert mutation.\n";
+        return "Inversion mutation.\n";
     }
 }

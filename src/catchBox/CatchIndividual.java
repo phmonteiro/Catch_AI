@@ -97,7 +97,7 @@ public class CatchIndividual extends IntVectorIndividual<CatchProblemForGA, Catc
      */
     @Override
     public int compareTo(CatchIndividual i) {
-        return (this.fitness == i.getFitness()) ? 0 : (this.fitness < i.getFitness()) ? 1 : -1;
+        return Double.compare(i.getFitness(), this.fitness);
     }
 
     @Override
