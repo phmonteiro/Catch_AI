@@ -12,13 +12,13 @@ Tournament size: 4
 
 //--------------------------------
 
-Recombination: pmx
+Recombination: pmx, cycle, order_1
 
 Recombination probability: 0.7, 0.8
 
 //--------------------------------
 
-Mutation: insert
+Mutation: insert, scramble, inversion 
 
 Mutation probability: 0.3, 0.5
 

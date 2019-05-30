@@ -31,8 +31,8 @@ public class CatchIndividual extends IntVectorIndividual<CatchProblemForGA, Catc
 
         // Fitness entre caixas
         for (int i=0; i<genome.length-1; i++) {
-            currentPosition = cellsBoxes.get(genome[i]-1);
-            nextPosition = cellsBoxes.get(genome[i+1]-1);
+            currentPosition = cellsBoxes.get(genome[i] - 1);
+            nextPosition = cellsBoxes.get(genome[i+1] - 1);
 
             fitness += fitnessBetweenTwoPositions(pairs, currentPosition, nextPosition);
         }
@@ -40,7 +40,6 @@ public class CatchIndividual extends IntVectorIndividual<CatchProblemForGA, Catc
         // Fitness da última caixa à porta
         currentPosition = cellsBoxes.get(genome[genome.length-1]-1);
         nextPosition = problem.getDoor();
-
         fitness += fitnessBetweenTwoPositions(pairs, currentPosition, nextPosition);
 
         return fitness;
