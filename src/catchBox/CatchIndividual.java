@@ -47,7 +47,6 @@ public class CatchIndividual extends IntVectorIndividual<CatchProblemForGA, Catc
 
     private double fitnessBetweenTwoPositions (LinkedList<Pair> pairs, Cell currentPosition, Cell nextPosition) {
         Cell firstCell, secondCell;
-        double fitness = 0;
 
         for (Pair p : pairs) {
             firstCell = p.getCell1();
@@ -55,12 +54,11 @@ public class CatchIndividual extends IntVectorIndividual<CatchProblemForGA, Catc
 
             if ((currentPosition.equals(firstCell) && nextPosition.equals(secondCell)) ||
                     (currentPosition.equals(secondCell) && nextPosition.equals(firstCell))) {
-                fitness += p.getValue();
-                break;
+                return p.getValue();
             }
         }
 
-        return fitness;
+        return 0;
     }
 
     public int[] getGenome() {
