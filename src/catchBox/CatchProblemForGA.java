@@ -26,10 +26,7 @@ public class CatchProblemForGA implements Problem<CatchIndividual> {
         pairsMapped = new HashMap<>();
         for (Pair p : pairs) {
             pairsMapped.put(p.toStringKey(), p.getValue());
-            System.out.println(p.toStringKey() + "\n");
         }
-
-        System.out.println(pairsMapped.toString());
     }
 
     public LinkedList<Pair> getPairs() {
