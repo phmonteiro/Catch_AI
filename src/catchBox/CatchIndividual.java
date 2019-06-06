@@ -2,6 +2,7 @@ package catchBox;
 
 import ga.IntVectorIndividual;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 
 
@@ -20,27 +21,31 @@ public class CatchIndividual extends IntVectorIndividual<CatchProblemForGA, Catc
     public double computeFitness() {
         //TODO
         LinkedList<Cell> cellsBoxes = problem.getCellsBoxes();
-        LinkedList<Pair> pairs = problem.getPairs();
+        HashMap<String, Integer> pairsMaped = problem.getPairsMapped();
 
         fitness = 0;
 
         // Fitness do catch até à primeira caixa
         Cell currentPosition = problem.getCellCatch();
         Cell nextPosition = cellsBoxes.get(genome[0]-1);
-        fitness += fitnessBetweenTwoPositions(pairs, currentPosition, nextPosition);
+        fitness += pairsMaped.get(currentPosition.toString() + " / " + nextPosition.toString());
 
         // Fitness entre caixas
         for (int i=0; i<genome.length-1; i++) {
             currentPosition = cellsBoxes.get(genome[i] - 1);
             nextPosition = cellsBoxes.get(genome[i+1] - 1);
 
-            fitness += fitnessBetweenTwoPositions(pairs, currentPosition, nextPosition);
+            if (pairsMaped.get(currentPosition.toString() + " / " + nextPosition.toString()) != null) {
+                fitness += pairsMaped.get(currentPosition.toString() + " / " + nextPosition.toString());
+            } else {
+                fitness += pairsMaped.get(nextPosition.toString() + " / " + currentPosition.toString());
+            }
         }
 
         // Fitness da última caixa à porta
         currentPosition = cellsBoxes.get(genome[genome.length-1]-1);
         nextPosition = problem.getDoor();
-        fitness += fitnessBetweenTwoPositions(pairs, currentPosition, nextPosition);
+        fitness += pairsMaped.get(currentPosition.toString() + " / " + nextPosition.toString());
 
         return fitness;
     }

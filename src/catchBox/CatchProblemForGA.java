@@ -1,6 +1,8 @@
 package catchBox;
 
 import ga.Problem;
+
+import java.util.HashMap;
 import java.util.LinkedList;
 
 public class CatchProblemForGA implements Problem<CatchIndividual> {
@@ -8,6 +10,7 @@ public class CatchProblemForGA implements Problem<CatchIndividual> {
 
     private LinkedList<Cell> cellsBoxes;
     private LinkedList<Pair> pairs;
+    private HashMap<String, Integer> pairsMapped;
     private Cell cellCatch;
     private Cell door;
 
@@ -19,10 +22,22 @@ public class CatchProblemForGA implements Problem<CatchIndividual> {
         this.pairs = pairs;
         this.cellCatch = cellCatch;
         this.door = door;
+
+        pairsMapped = new HashMap<>();
+        for (Pair p : pairs) {
+            pairsMapped.put(p.toStringKey(), p.getValue());
+            System.out.println(p.toStringKey() + "\n");
+        }
+
+        System.out.println(pairsMapped.toString());
     }
 
     public LinkedList<Pair> getPairs() {
         return new LinkedList<>(pairs);
+    }
+
+    public HashMap<String, Integer> getPairsMapped() {
+        return pairsMapped;
     }
 
     public LinkedList<Cell> getCellsBoxes() {
