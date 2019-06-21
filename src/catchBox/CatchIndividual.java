@@ -28,24 +28,24 @@ public class CatchIndividual extends IntVectorIndividual<CatchProblemForGA, Catc
         // Fitness do catch até à primeira caixa
         Cell currentPosition = problem.getCellCatch();
         Cell nextPosition = cellsBoxes.get(genome[0]-1);
-        fitness += pairsMaped.get(currentPosition.toString() + " / " + nextPosition.toString());
+        fitness += pairsMaped.get(currentPosition + " / " + nextPosition);
 
         // Fitness entre caixas
         for (int i=0; i<genome.length-1; i++) {
             currentPosition = cellsBoxes.get(genome[i] - 1);
             nextPosition = cellsBoxes.get(genome[i+1] - 1);
 
-            if (pairsMaped.get(currentPosition.toString() + " / " + nextPosition.toString()) != null) {
-                fitness += pairsMaped.get(currentPosition.toString() + " / " + nextPosition.toString());
+            if (pairsMaped.get(currentPosition + " / " + nextPosition) != null) {
+                fitness += pairsMaped.get(currentPosition + " / " + nextPosition);
             } else {
-                fitness += pairsMaped.get(nextPosition.toString() + " / " + currentPosition.toString());
+                fitness += pairsMaped.get(nextPosition + " / " + currentPosition);
             }
         }
 
         // Fitness da última caixa à porta
         currentPosition = cellsBoxes.get(genome[genome.length-1]-1);
         nextPosition = problem.getDoor();
-        fitness += pairsMaped.get(currentPosition.toString() + " / " + nextPosition.toString());
+        fitness += pairsMaped.get(currentPosition + " / " + nextPosition);
 
         return fitness;
     }

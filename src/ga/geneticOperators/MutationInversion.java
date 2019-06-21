@@ -18,23 +18,23 @@ public class MutationInversion<I extends IntVectorIndividual, P extends Problem<
     @Override
     public void mutate(I ind) {
         int numGenes = ind.getNumGenes();
-        int firstAlello = GeneticAlgorithm.random.nextInt(numGenes);
-        int secondAlello;
+        int firstAlelo = GeneticAlgorithm.random.nextInt(numGenes);
+        int secondAlelo;
 
         do {
-            secondAlello = GeneticAlgorithm.random.nextInt(numGenes);
-        } while (firstAlello == secondAlello);
+            secondAlelo = GeneticAlgorithm.random.nextInt(numGenes);
+        } while (firstAlelo == secondAlelo);
 
-        if (firstAlello > secondAlello) {
-            int aux = firstAlello;
-            firstAlello = secondAlello;
-            secondAlello = aux;
+        if (firstAlelo > secondAlelo) {
+            int aux = firstAlelo;
+            firstAlelo = secondAlelo;
+            secondAlelo = aux;
         }
 
-        int j = secondAlello - 1;
+        int j = secondAlelo - 1;
         int auxGene;
 
-        for (int i = firstAlello + 1; i < j ; i++, j--) {
+        for (int i = firstAlelo + 1; i < j ; i++, j--) {
             auxGene = ind.getGene(i);
             ind.setGene(i, ind.getGene(j));
             ind.setGene(j, auxGene);

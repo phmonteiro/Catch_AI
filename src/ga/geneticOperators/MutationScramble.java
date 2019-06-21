@@ -16,30 +16,30 @@ public class MutationScramble<I extends IntVectorIndividual, P extends Problem<I
     @Override
     public void mutate(I ind) {
         int numGenes = ind.getNumGenes();
-        int firstAlello = GeneticAlgorithm.random.nextInt(numGenes);
-        int secondAlello;
+        int firstAlelo = GeneticAlgorithm.random.nextInt(numGenes);
+        int secondAlelo;
 
         do {
-            secondAlello = GeneticAlgorithm.random.nextInt(numGenes);
-        } while (firstAlello == secondAlello);
+            secondAlelo = GeneticAlgorithm.random.nextInt(numGenes);
+        } while (firstAlelo == secondAlelo);
 
-        if (firstAlello > secondAlello) {
-            int aux = firstAlello;
-            firstAlello = secondAlello;
-            secondAlello = aux;
+        if (firstAlelo > secondAlelo) {
+            int aux = firstAlelo;
+            firstAlelo = secondAlelo;
+            secondAlelo = aux;
         }
 
         LinkedList<Integer> individualGenes = new LinkedList<>();
         int i;
 
-        for (i = firstAlello; i <= secondAlello; i++) {
+        for (i = firstAlelo; i <= secondAlelo; i++) {
             individualGenes.add(ind.getGene(i));
         }
 
         int selectedGene;
-        int genesRemaining = secondAlello - firstAlello + 1;
+        int genesRemaining = secondAlelo - firstAlelo + 1;
 
-        for (i = firstAlello; i <= secondAlello; i++) {
+        for (i = firstAlelo; i <= secondAlelo; i++) {
             selectedGene =  individualGenes.get(GeneticAlgorithm.random.nextInt(genesRemaining));
             ind.setGene(i, selectedGene);
             individualGenes.remove(individualGenes.indexOf(selectedGene));
