@@ -1,4 +1,22 @@
 Population size:	Max generations:	Selection:	Recombination:	Recombination prob.:	Mutation:	Mutation prob.:		Average:	StdDev:
-100	250	Tournament(4)	PMX	0.7	Insert	0.2		156.8	13.635248439247448
-100	250	Tournament(4)	PMX	0.8	Insert	0.2		154.64	13.88777880008175
-100	250	Tournament(4)	PMX	0.85	Insert	0.2		153.88	14.357771414812257
+100	250	Tournament(4)	PMX	0.5	Insert	0.2		150.6	13.64453492550528
+100	250	Tournament(4)	PMX	0.55	Insert	0.2		161.13333333333333	13.172530339898845
+100	250	Tournament(4)	PMX	0.6	Insert	0.2		150.46666666666667	15.316077246547897
+100	250	Tournament(4)	PMX	0.65	Insert	0.2		154.4	14.961283367412037
+100	250	Tournament(4)	PMX	0.7	Insert	0.2		159.33333333333334	13.898041428760944
+100	250	Tournament(4)	PMX	0.75	Insert	0.2		151.0	14.72186582377836
+100	250	Tournament(4)	PMX	0.8	Insert	0.2		154.66666666666666	15.225709251861543
+100	250	Tournament(4)	PMX	0.85	Insert	0.2		156.73333333333332	13.88028177747924
+100	250	Tournament(4)	PMX	0.9	Insert	0.2		151.86666666666667	14.849766178480913
+									
+									
+	Best Fitness	Average Fitness	Standard Deviation						
+0.5	124	150,60	13,64						
+0.55	140	161,13	13,17						
+0.6	118	150,47	15,32						
+0.65	126	154,40	14,96						
+0.7	128	159,33	13,90						
+0.75	122	151,00	14,72						
+0.8	122	154,67	15,23						
+0.85	128	156,73	13,88						
+0.9	126	151,87	14,85						
