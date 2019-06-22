@@ -1,0 +1,6 @@
+NOTAS:
+
+    > Tamanho da população inicial leva a melhorias no fitness das soluções obtidas
+    > A mutation probability regista os melhores valores entre 0.35 e 0.65, sendo os valores de 0.55 e 0.6 os que melhores resultados obtiveram
+    > Nos métodos de mutação, o algoritmo que melhores soluções apresenta é o de "Inversion". Mesmo com uma população inicial reduzida produz um bons resultado com um desvio-padrão pouco significativo. Ainda assim, ao fim de cinco mil gerações, o método de mutação que obteve o melhor resultado foi o "Insert".
+    > Os métodos de recombinação apresentam resultados muito similares entre todos eles, sendo que nenhum deles se destacou
