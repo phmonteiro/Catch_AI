@@ -7,7 +7,6 @@ import java.util.LinkedList;
 
 
 public class CatchIndividual extends IntVectorIndividual<CatchProblemForGA, CatchIndividual> {
-    private double value;
 
     public CatchIndividual(CatchProblemForGA problem, int size) {
         super(problem, size);
@@ -48,22 +47,6 @@ public class CatchIndividual extends IntVectorIndividual<CatchProblemForGA, Catc
         fitness += pairsMaped.get(currentPosition + " / " + nextPosition);
 
         return fitness;
-    }
-
-    private double fitnessBetweenTwoPositions (LinkedList<Pair> pairs, Cell currentPosition, Cell nextPosition) {
-        Cell firstCell, secondCell;
-
-        for (Pair p : pairs) {
-            firstCell = p.getCell1();
-            secondCell = p.getCell2();
-
-            if ((currentPosition.equals(firstCell) && nextPosition.equals(secondCell)) ||
-                    (currentPosition.equals(secondCell) && nextPosition.equals(firstCell))) {
-                return p.getValue();
-            }
-        }
-
-        return 0;
     }
 
     public int[] getGenome() {
